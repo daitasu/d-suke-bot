@@ -43,7 +43,7 @@ bot.on('unfollow', (event) => {
 
 bot.on('message', (event) => {
     console.log('message event');
-    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', { park: "land" order: "wait", function (err, $, res) {
+    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', { park: "land" order: "wait"}, function (err, $, res) {
         // レスポンスヘッダを参照
         console.log(res.headers);
 
