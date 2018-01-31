@@ -2,7 +2,7 @@ const express = require('express');
 const linebot = require('linebot');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const cheerio = ('cheerio-httpcli');
+const cheerio = require('cheerio-httpcli');
 
 
 const bot = linebot({
