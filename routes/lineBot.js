@@ -12,9 +12,11 @@ router.post('/', parser, (req, res, next) => {
     if (req.body.events === '') {
         return;
     }
+    console.log('before verify');
     if (!bot.verify(req.rawBody, req.get('X-Line-Signature'))) {
         return res.sendStatus(400);
     }
+    console.log('try');
     bot.parse(req.body);
     res.set('Content-Type', 'text/plain');
     res.status(200).end();
@@ -34,3 +36,5 @@ bot.on('message', (event) => {
     console.log('message event');
     event.reply(event.message.text);
 });
+
+module.exports = router;
