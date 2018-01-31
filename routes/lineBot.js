@@ -1,11 +1,19 @@
 const express = require('express');
 const linebot = require('linebot');
 const router = express.Router();
+const bodyParser = require('body-parser');
+
 
 const bot = linebot({
     channelId: process.env.LINE_CHANNEL_ID,
     channelSecret: process.env.LINE_CHANNEL_SECRET,
     channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN
+});
+
+const parser = bodyParser.json({
+    verify: (req, res, buf, encoding) => {
+        req.rawBody = buf.toString(encoding);
+    }
 });
 
 router.post('/', parser, (req, res, next) => {
