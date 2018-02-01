@@ -56,26 +56,26 @@ bot.on('message', (event) => {
     //
     // });
 
-    cheerio.fetch('https://disneyreal.asumirai.info/')
-        .then((result) => {
-            console.log('hei');
-            return cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html');
-        }).then((result) =>{
-            let $ = result.$;
-            console.log("hello");
-            console.log($('title').text());
-        })
-        .catch(function (err) {
-            console.log("error ->");
-            console.log(err);
-        });
+    // cheerio.fetch('https://disneyreal.asumirai.info/')
+    //     .then((result) => {
+    //         console.log('hei');
+    //         return cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html');
+    //     }).then((result) =>{
+    //         let $ = result.$;
+    //         console.log("hello");
+    //         console.log($('title').text());
+    //     })
+    //     .catch(function (err) {
+    //         console.log("error ->");
+    //         console.log(err);
+    //     });
 
     cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park:'land'})
         .then((result) =>{
         let $ = result.$;
         console.log("hello");
         console.log($('title').text());
-        
+        console.log($('.ui-listview'));
 
         }).catch(function (err) {
             console.log("error ->");
