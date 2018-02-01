@@ -41,34 +41,36 @@ bot.on('unfollow', (event) => {
     console.log('unfollow success');
 });
 
-bot.on('message', async (event) => {
+bot.on('message', (event) => {
     console.log('message event');
-    const waitingTime = await getWaitingTime("land");
+    const waitingTime = getWaitingTime("land");
     console.log("return ->", waitingTime);
     event.reply(event.message.text);
 });
 
 function getWaitingTime(name) {
 
-    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
-        .then((result) => {
-            let replyMessage = "";
-            let lists = result.$('li').text();
+    return new Promise( function() {
+        cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
+            .then((result) => {
+                let replyMessage = "";
+                let lists = result.$('li').text();
 
-            lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
-            lists.forEach((list) => {
-                if (list.indexOf("FP") !== -1) {
-                    replyMessage += list;
-                }else {
-                    replyMessage += "\n" + list;
-                }
-            });
-            console.log(replyMessage);
-            return replyMessage;
+                lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+                lists.forEach((list) => {
+                    if (list.indexOf("FP") !== -1) {
+                        replyMessage += list;
+                    } else {
+                        replyMessage += "\n" + list;
+                    }
+                });
+                console.log(replyMessage);
+                resolve(replyMessage);
 
-        }).catch((err) => {
-        console.log("error ->");
-        console.log(err);
+            }).catch((err) => {
+            console.log("error ->", err);
+            reject(err);
+        })
     });
 
 }
