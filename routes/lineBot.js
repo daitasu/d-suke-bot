@@ -43,61 +43,34 @@ bot.on('unfollow', (event) => {
 
 bot.on('message', (event) => {
     console.log('message event');
-    // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', { park: "land", order: "wait"}, function (err, $, res) {
-    //     // レスポンスヘッダを参照
-    //     console.log(res.headers);
-    //
-    //     // HTMLタイトルを表示
-    //     console.log($('title').text());
-    //
-    //     $('ui.wait-time li').each((test) =>{
-    //         console.log('test ->', test);
-    //     });
-    //
-    // });
-
-    // cheerio.fetch('https://disneyreal.asumirai.info/')
-    //     .then((result) => {
-    //         console.log('hei');
-    //         return cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html');
-    //     }).then((result) =>{
-    //         let $ = result.$;
-    //         console.log("hello");
-    //         console.log($('title').text());
-    //     })
-    //     .catch(function (err) {
-    //         console.log("error ->");
-    //         console.log(err);
-    //     });
-
-    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park:'land'})
-        .then((result) =>{
-        let $ = result.$;
-
-        let lists = $('li').text();
-        lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
-        console.log(lists);
-
-
-        let replyMessage = "";
-
-        lists.forEach((list) => {
-            if(list.indexOf("FP") !== -1) {
-                return replyMessage += " " + list;
-            }
-            return replyMessage += "\n" + list;
-        });
-
-        console.log(replyMessage);
-            
-        }).catch((err) => {
-            console.log("error ->");
-            console.log(err);
-        });
-
-
-
+    const waitingTime = getWaitingTime("land");
+    console.log(waitingTime);
     event.reply(event.message.text);
 });
+
+function getWaitingTime(name) {
+    let replyMessage = "";
+
+    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
+        .then((result) => {
+            let lists = result.$('li').text();
+
+            lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+            lists.forEach((list) => {
+                if (list.indexOf("FP") !== -1) {
+                    return replyMessage += list;
+                }
+                return replyMessage += "\n" + list;
+            });
+
+
+        }).catch((err) => {
+        console.log("error ->");
+        console.log(err);
+    });
+
+    return replyMessage;
+
+}
 
 module.exports = router;
