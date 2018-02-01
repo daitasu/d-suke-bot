@@ -50,7 +50,7 @@ bot.on('message', (event) => {
 
 function getWaitingTime(name) {
 
-    return new Promise( function() {
+    return new Promise( function(resolve, reject) {
         cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
             .then((result) => {
                 let replyMessage = "";
