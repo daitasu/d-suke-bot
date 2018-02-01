@@ -75,9 +75,8 @@ bot.on('message', (event) => {
         let $ = result.$;
         console.log("hello");
         console.log($('title').text());
-        console.log($('.ui-listview').html());
-        console.log($('.ui-listview .ui-btn-up-e').html());
-
+        console.log($('li').html());
+        console.log($('ul'));
 
         }).catch(function (err) {
             console.log("error ->");
