@@ -76,14 +76,9 @@ bot.on('message', (event) => {
         console.log("hello");
 
         let list = $('li').text();
-        list1 = list.trim().replace(/\t/g, "").replace(/\n+/g, ",");
-        list2 = list.trim().replace(/\t/g, "").split("\n+");
-
-        console.log(list1);
-        console.log(list2);
-
-        
-
+        list = list.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+        console.log(list);
+            
         }).catch(function (err) {
             console.log("error ->");
             console.log(err);
