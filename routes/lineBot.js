@@ -56,8 +56,11 @@ bot.on('message', (event) => {
     //
     // });
 
-    cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html')
-        .then((result) =>{
+    cheerio.fetch('https://disneyreal.asumirai.info/')
+        .then((result) => {
+            console.log('hei');
+            return cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html');
+        }).then((result) =>{
             let $ = result.$;
             console.log("hello");
             console.log($('title').text());
