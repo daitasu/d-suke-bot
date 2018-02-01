@@ -43,18 +43,27 @@ bot.on('unfollow', (event) => {
 
 bot.on('message', (event) => {
     console.log('message event');
-    cheerio.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html', {}, function (err, $, res) {
-        // レスポンスヘッダを参照
-        // console.log(res.headers);
+    // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', { park: "land", order: "wait"}, function (err, $, res) {
+    //     // レスポンスヘッダを参照
+    //     console.log(res.headers);
+    //
+    //     // HTMLタイトルを表示
+    //     console.log($('title').text());
+    //
+    //     $('ui.wait-time li').each((test) =>{
+    //         console.log('test ->', test);
+    //     });
+    //
+    // });
 
-        // HTMLタイトルを表示
-        console.log($('title').text());
-
-        $('ui.wait-time li').each((test) =>{
-            console.log('test ->', test);
+    client.fetch('https://disneyreal.asumirai.info/realtime/disneysea-wait-today-wa.html')
+        .then((result) =>{
+            let $ = result.$;
+            console.log($('title').text());
+        })
+        .catch(function (err) {
+            console.log(err);
         });
-
-    });
 
     event.reply(event.message.text);
 });
