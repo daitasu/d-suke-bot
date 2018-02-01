@@ -73,13 +73,24 @@ bot.on('message', (event) => {
     cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park:'land'})
         .then((result) =>{
         let $ = result.$;
-        console.log("hello");
 
-        let list = $('li').text();
-        list = list.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
-        console.log(list);
+        let lists = $('li').text();
+        lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+        console.log(lists);
+
+
+        let replyMessage = "";
+
+        lists.forEach((list) => {
+            if(list.indexOf("FP") !== -1) {
+                return replyMessage += " " + list;
+            }
+            return replyMessage += "\n" + list;
+        });
+
+        console.log(replyMessage);
             
-        }).catch(function (err) {
+        }).catch((err) => {
             console.log("error ->");
             console.log(err);
         });
