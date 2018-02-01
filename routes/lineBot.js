@@ -50,11 +50,9 @@ bot.on('message', (event) => {
 
 async function getWaitingTime(name) {
 
-    const cheerioMessage = await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"});
+    const cheerioObject= await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"});
 
-    console.log(cheerioMessage.result);
-    console.log(cheerioMessage.$);
-    console.log(cheerioMessage.error);
+    console.log(cheerioObject.$('li').text());
 
 
     // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"})
