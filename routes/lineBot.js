@@ -74,9 +74,11 @@ bot.on('message', (event) => {
         .then((result) =>{
         let $ = result.$;
         console.log("hello");
-        console.log($('title').text());
         console.log($('li').text());
-        // $('li')
+
+        $('li').each((index) => {
+            console.log(index + ': ' + $(this).text());
+        })
 
         }).catch(function (err) {
             console.log("error ->");
