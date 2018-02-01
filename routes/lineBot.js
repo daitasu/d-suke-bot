@@ -44,10 +44,11 @@ bot.on('unfollow', (event) => {
 bot.on('message', async (event) => {
     console.log('message event');
     let replyMessage;
-
-    if(event.message.text.indexOf('>Dランド') !== -1) {
+    console.log(event.message.text);
+    if(event.message.text.indexOf('Dランド') !== -1) {
+        console.log('land');
         replyMessage = await getWaitingTime("land");
-    }else if(event.message.text.indexOf('>Dシー') !== -1){
+    }else if(event.message.text.indexOf('Dシー') !== -1){
         replyMessage = await getWaitingTime("sea");
     }else {
         replyMessage = "待ち時間を取得するには、メニューからボタンをお選び下さい。";
