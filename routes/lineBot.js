@@ -74,14 +74,14 @@ bot.on('message', (event) => {
         .then((result) =>{
         let $ = result.$;
         console.log("hello");
-        console.log($('li').text());
 
         let list = $('li').text();
-        console.log(list.replace(/\t/g, "").trim());
+        console.log('tab ->', list.replace(/\t/g, "").trim());
 
         list = list.replace(/\t/g, "").trim();
 
-        console.log(list.replace(/\n+/g, ""));
+        console.log("take2 ->", list.replace(/\n+/g, ""));
+        console.log("take3 ->", list.replace(/\n+/g, ","));
 
         }).catch(function (err) {
             console.log("error ->");
