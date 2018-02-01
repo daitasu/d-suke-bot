@@ -78,6 +78,8 @@ bot.on('message', (event) => {
 
         const a = $('li').text();
         console.log(typeof a);
+        console.log(a.trim());
+        console.log(a.replace(/\t/g, ""));
         // $('li').each((index, ele) => {
         //     console.log(ele);
         // })
