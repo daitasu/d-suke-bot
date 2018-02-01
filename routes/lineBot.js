@@ -44,15 +44,14 @@ bot.on('unfollow', (event) => {
 bot.on('message', (event) => {
     console.log('message event');
     const waitingTime = getWaitingTime("land");
-    console.log("return ->", waitingTime);
+    console.log(waitingTime);
     event.reply(event.message.text);
 });
 
 async function getWaitingTime(name) {
-
+    console.log('get');
     const cheerioObject= await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"});
-
-    console.log(cheerioObject.$('li').text());
+    console.log('sssss');
     let replyMessage = "";
     let lists = cheerioObject.$('li').text();
 
