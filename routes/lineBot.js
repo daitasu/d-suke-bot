@@ -48,30 +48,35 @@ bot.on('message', (event) => {
     event.reply(event.message.text);
 });
 
-function getWaitingTime(name) {
+async function getWaitingTime(name) {
 
-    return new Promise( function(resolve, reject) {
-        cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
-            .then((result) => {
-                let replyMessage = "";
-                let lists = result.$('li').text();
+    const cheerioMessage = await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"});
 
-                lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
-                lists.forEach((list) => {
-                    if (list.indexOf("FP") !== -1) {
-                        replyMessage += list;
-                    } else {
-                        replyMessage += "\n" + list;
-                    }
-                });
-                console.log(replyMessage);
-                resolve(replyMessage);
+    console.log(cheerioMessage.result);
+    console.log(cheerioMessage.$);
+    console.log(cheerioMessage.error);
 
-            }).catch((err) => {
-            console.log("error ->", err);
-            reject(err);
-        })
-    });
+
+    // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"})
+    //     .then((result) => {
+    //         let replyMessage = "";
+    //         let lists = result.$('li').text();
+    //
+    //         lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+    //         lists.forEach((list) => {
+    //             if (list.indexOf("FP") !== -1) {
+    //                 replyMessage += list;
+    //             }else {
+    //                 replyMessage += "\n" + list;
+    //             }
+    //         });
+    //         console.log(replyMessage);
+    //         return replyMessage;
+    //
+    //     }).catch((err) => {
+    //     console.log("error ->");
+    //     console.log(err);
+    // });
 
 }
 
