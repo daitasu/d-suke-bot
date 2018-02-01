@@ -41,9 +41,9 @@ bot.on('unfollow', (event) => {
     console.log('unfollow success');
 });
 
-bot.on('message', (event) => {
+bot.on('message', async (event) => {
     console.log('message event');
-    const waitingTime = getWaitingTime("land");
+    const waitingTime = await getWaitingTime("land");
     console.log(waitingTime);
     event.reply(event.message.text);
 });
