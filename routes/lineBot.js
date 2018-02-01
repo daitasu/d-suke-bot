@@ -50,9 +50,22 @@ bot.on('message', (event) => {
 
 async function getWaitingTime(name) {
 
-    const cheerioObject= await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"});
+    const cheerioObject= await cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"});
 
     console.log(cheerioObject.$('li').text());
+    let replyMessage = "";
+    let lists = cheerioObject.$('li').text();
+
+    lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+    lists.forEach((list) => {
+        if (list.indexOf("FP") !== -1) {
+            replyMessage += list;
+        }else {
+            replyMessage += "\n" + list;
+        }
+    });
+    console.log(replyMessage);
+    return replyMessage;
 
 
     // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"})
