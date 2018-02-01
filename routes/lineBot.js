@@ -70,6 +70,20 @@ bot.on('message', (event) => {
             console.log(err);
         });
 
+    cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park:'land'})
+        .then((result) =>{
+        let $ = result.$;
+        console.log("hello");
+        console.log($('title').text());
+        
+
+        }).catch(function (err) {
+            console.log("error ->");
+            console.log(err);
+        });
+
+
+
     event.reply(event.message.text);
 });
 
