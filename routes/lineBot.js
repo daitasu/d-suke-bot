@@ -75,7 +75,7 @@ bot.on('message', (event) => {
         let $ = result.$;
         console.log("hello");
         console.log($('title').text());
-        console.log($('li').val());
+        console.log($('li').text());
         // $('li')
 
         }).catch(function (err) {
