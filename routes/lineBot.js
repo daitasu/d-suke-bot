@@ -49,27 +49,27 @@ bot.on('message', (event) => {
 });
 
 function getWaitingTime(name) {
-    let replyMessage = "";
 
     cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: name, order: "wait"})
         .then((result) => {
+            let replyMessage = "";
             let lists = result.$('li').text();
 
             lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
             lists.forEach((list) => {
                 if (list.indexOf("FP") !== -1) {
-                    return replyMessage += list;
+                    replyMessage += list;
+                }else {
+                    replyMessage += "\n" + list;
                 }
-                return replyMessage += "\n" + list;
             });
 
+            return replyMessage;
 
         }).catch((err) => {
         console.log("error ->");
         console.log(err);
     });
-
-    return replyMessage;
 
 }
 
