@@ -43,9 +43,17 @@ bot.on('unfollow', (event) => {
 
 bot.on('message', async (event) => {
     console.log('message event');
-    const waitingTime = await getWaitingTime("land");
-    console.log('return ->', waitingTime);
-    event.reply(event.message.text);
+    let replyMessage;
+
+    if(event.message.text.indexOf('>Dランド')) {
+        replyMessage = await getWaitingTime("land");
+    }else if(event.message.text.indexOf('>Dシー')){
+        replyMessage = await getWaitingTime("sea");
+    }else {
+        replyMessage = "待ち時間を取得するには、メニューからボタンをお選び下さい。";
+    }
+    console.log('return ->', replyMessage);
+    event.reply(replyMessage);
 });
 
 async function getWaitingTime(name) {
