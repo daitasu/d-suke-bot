@@ -41,10 +41,10 @@ bot.on('unfollow', (event) => {
     console.log('unfollow success');
 });
 
-bot.on('message', (event) => {
+bot.on('message', async (event) => {
     console.log('message event');
-    const waitingTime = getWaitingTime("land");
-    console.log(waitingTime);
+    const waitingTime = await getWaitingTime("land");
+    console.log("return ->", waitingTime);
     event.reply(event.message.text);
 });
 
@@ -63,7 +63,7 @@ function getWaitingTime(name) {
                     replyMessage += "\n" + list;
                 }
             });
-
+            console.log(replyMessage);
             return replyMessage;
 
         }).catch((err) => {
