@@ -76,13 +76,12 @@ bot.on('message', (event) => {
         console.log("hello");
         console.log($('li').text());
 
-        const a = $('li').text();
-        console.log(typeof a);
-        console.log(a.trim());
-        console.log(a.replace(/\t/g, ""));
-        // $('li').each((index, ele) => {
-        //     console.log(ele);
-        // })
+        let list = $('li').text();
+        console.l(list.replace(/\t/g, "").trim());
+
+        list = list.replace(/\t/g, "").trim();
+
+        console.log(list.replace(/\n+/g, ","));
 
         }).catch(function (err) {
             console.log("error ->");
