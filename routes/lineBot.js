@@ -64,7 +64,7 @@ async function getWaitingTime(name) {
 
     lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
     lists.forEach((list) => {
-        if (list.indexOf("FP") !== -1) {
+        if (list.indexOf("更新") !== -1) {
             replyMessage += list;
         }else {
             replyMessage += "\n" + list;
