@@ -62,7 +62,7 @@ async function getWaitingTime(name) {
     let replyMessage = "";
     let lists = cheerioObject.$('li').text();
 
-    lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",").trim();
+    lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
     lists.forEach((list) => {
         if (list.indexOf(" 更新") !== -1) {
             replyMessage += list;
