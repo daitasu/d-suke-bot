@@ -66,10 +66,10 @@ async function getWaitingTime(name) {
     lists.forEach((list) => {
         if (list.indexOf(" 更新") !== -1) {
             replyMessage += list;
-        }else if(list.indexOf("FP") === -1 || list.indexOf("更新") === -1 || list.indexOf("中") === -1 || list.indexOf("分") === -1) {
-            replyMessage += "\n\n" + list;
-        } else {
+        }else if(list.indexOf("FP") !== -1 || list.indexOf("更新") !== -1 || list.indexOf("中") !== -1 || list.indexOf("分") !== -1) {
             replyMessage += "\n" + list;
+        } else {
+            replyMessage += "\n\n" + list;
         }
     });
     return replyMessage;
