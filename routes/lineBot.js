@@ -64,9 +64,9 @@ async function getWaitingTime(name) {
 
     lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
     lists.forEach((list) => {
-        if (list.indexOf(" 更新") !== -1) {
+        if (list.indexOf("更新") !== -1) {
             replyMessage += list;
-        }else if(list.indexOf("FP") !== -1 || list.indexOf("更新") !== -1 || list.indexOf("中") !== -1 || list.indexOf("分") !== -1 || list.indexOf("情報なし") !== -1 ||list.indexOf("案内") !== -1 ) {
+        }else if(list.indexOf("FP") !== -1 || list.indexOf("中") !== -1 || list.indexOf("分") !== -1 || list.indexOf("情報なし") !== -1 ||list.indexOf("案内") !== -1 ) {
             replyMessage += "\n" + list;
         } else {
             replyMessage += "\n\n" + list;
