@@ -62,37 +62,17 @@ async function getWaitingTime(name) {
     let replyMessage = "";
     let lists = cheerioObject.$('li').text();
 
-    lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
+    lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",").trim();
     lists.forEach((list) => {
-        if (list.indexOf("更新") !== -1) {
+        if (list.indexOf(" 更新") !== -1) {
             replyMessage += list;
-        }else {
+        }else if(list.indexOf("FP") === -1 || list.indexOf("更新") === -1 || list.indexOf("中") === -1 || list.indexOf("分") === -1) {
+            replyMessage += "\n\n" + list;
+        } else {
             replyMessage += "\n" + list;
         }
     });
     return replyMessage;
-
-
-    // cheerio.fetch('http://tokyodisneyresort.info/smartPhone/realtime.php', {park: "land", order: "wait"})
-    //     .then((result) => {
-    //         let replyMessage = "";
-    //         let lists = result.$('li').text();
-    //
-    //         lists = lists.trim().replace(/\t/g, "").replace(/\n+/g, ",").split(",");
-    //         lists.forEach((list) => {
-    //             if (list.indexOf("FP") !== -1) {
-    //                 replyMessage += list;
-    //             }else {
-    //                 replyMessage += "\n" + list;
-    //             }
-    //         });
-    //         console.log(replyMessage);
-    //         return replyMessage;
-    //
-    //     }).catch((err) => {
-    //     console.log("error ->");
-    //     console.log(err);
-    // });
 
 }
 
