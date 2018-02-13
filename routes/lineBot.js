@@ -42,6 +42,11 @@ bot.on('unfollow', (event) => {
 
 bot.on('message', async (event) => {
     console.log('message event');
+
+    if(event.message.type !== 'text') {
+        console.log('this is not text');
+        return;
+    }
     let replyMessage;
     console.log(event.message.text);
     if(event.message.text.indexOf('Dランド') !== -1) {
@@ -65,7 +70,7 @@ async function getWaitingTime(name) {
     lists.forEach((list) => {
         if (list.indexOf("更新") !== -1){
             replyMessage += list;
-        } else if (/"FP"|"中"|"分"|"情報なし"|"案内"/.test(list)){
+        } else if (/FP|中|分|情報なし|案内/.test(list)){
             replyMessage += "\n" + list;
         } else {
             replyMessage += "\n\n" + list;
