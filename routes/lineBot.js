@@ -20,11 +20,9 @@ router.post('/', parser, (req, res, next) => {
     if (req.body.events === '') {
         return;
     }
-    console.log('before verify');
     if (!bot.verify(req.rawBody, req.get('X-Line-Signature'))) {
         return res.sendStatus(400);
     }
-    console.log('try');
     bot.parse(req.body);
     res.set('Content-Type', 'text/plain');
     res.status(200).end();
@@ -32,32 +30,28 @@ router.post('/', parser, (req, res, next) => {
 
 // 友達追加
 bot.on('follow', (event) => {
-    console.log('follow success!');
+    console.log('follow event');
 });
 
 // ブロック
 bot.on('unfollow', (event) => {
-    console.log('unfollow success');
+    console.log('unfollow event');
 });
 
 bot.on('message', async (event) => {
     console.log('message event');
 
     if(event.message.type !== 'text') {
-        console.log('this is not text');
         return;
     }
     let replyMessage;
-    console.log(event.message.text);
     if(event.message.text.indexOf('Dランド') !== -1) {
-        console.log('land');
         replyMessage = await getWaitingTime("land");
     }else if(event.message.text.indexOf('Dシー') !== -1){
         replyMessage = await getWaitingTime("sea");
     }else {
         replyMessage = "待ち時間を取得するには、メニューからボタンをお選び下さい。";
     }
-    console.log('return ->', replyMessage);
     event.reply(replyMessage);
 });
 
@@ -77,7 +71,6 @@ async function getWaitingTime(name) {
         }
     });
     return replyMessage;
-
 }
 
 module.exports = router;
